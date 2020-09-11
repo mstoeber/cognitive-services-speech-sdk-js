@@ -3,6 +3,7 @@
 
 export * from "./ConsoleLoggingListener";
 export * from "./IRecorder";
+export * from "./MediaStreamAudioSource";
 export * from "./MicAudioSource";
 export * from "./FileAudioSource";
 export * from "./PCMRecorder";

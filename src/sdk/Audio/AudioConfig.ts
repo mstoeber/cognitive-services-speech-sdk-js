@@ -4,6 +4,7 @@
 import { PathLike } from "fs";
 import {
     FileAudioSource,
+    MediaStreamAudioSource,
     MicAudioSource,
     PcmRecorder,
 } from "../../common.browser/Exports";
@@ -38,9 +39,21 @@ import { AudioStreamFormatImpl } from "./AudioStreamFormat";
 /**
  * Represents audio input configuration used for specifying what type of input to use (microphone, file, stream).
  * @class AudioConfig
- * Updated in version 1.11.0
+ * Updated in version <Custom by Martin Stöber 1.0>
  */
 export abstract class AudioConfig {
+    /**
+     * Creates an AudioConfig object representing a RTC MediaStream.
+     * @member AudioConfig.fromMediaStream
+     * @function
+     * @public
+     * @returns {AudioConfig} The audio input configuration being created.
+     */
+    public static fromMediaStream(mediaStream: MediaStream): AudioConfig {
+        const pcmRecorder = new PcmRecorder();
+        return new AudioConfigImpl(new MediaStreamAudioSource(pcmRecorder, mediaStream));
+    }
+
     /**
      * Creates an AudioConfig object representing the default microphone on the system.
      * @member AudioConfig.fromDefaultMicrophoneInput
