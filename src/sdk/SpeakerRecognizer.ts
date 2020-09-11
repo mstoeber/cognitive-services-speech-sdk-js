@@ -11,7 +11,7 @@ import {
     SpeakerRecognitionConfig,
 } from "../common.speech/Exports";
 import { marshalPromiseToCallbacks } from "../common/Exports";
-import { AudioConfig, AudioConfigImpl } from "./audio/AudioConfig";
+import { AudioConfig, AudioConfigImpl } from "./Audio/AudioConfig";
 import { Contracts } from "./Contracts";
 import {
     PropertyCollection,
@@ -21,7 +21,6 @@ import {
     SpeakerRecognitionResult,
     SpeakerRecognitionResultType,
     SpeakerVerificationModel,
-    VoiceProfile,
 } from "./Exports";
 import { SpeechConfig, SpeechConfigImpl } from "./SpeechConfig";
 
