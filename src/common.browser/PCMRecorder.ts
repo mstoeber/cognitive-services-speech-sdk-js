@@ -33,7 +33,7 @@ export class PcmRecorder implements IRecorder {
         scriptNode.onaudioprocess = (event: AudioProcessingEvent) => {
             const inputFrame = event.inputBuffer.getChannelData(0);
 
-            if (outputStream && !outputStream.isClosed) {
+            if (inputFrame !== undefined && outputStream && !outputStream.isClosed) {
                 const waveFrame = waveStreamEncoder.encode(inputFrame);
                 if (!!waveFrame) {
                     outputStream.writeStreamChunk({
@@ -59,7 +59,7 @@ export class PcmRecorder implements IRecorder {
                     workletNode.port.onmessage = (ev: MessageEvent) => {
                         const inputFrame: Float32Array = ev.data as Float32Array;
 
-                        if (outputStream && !outputStream.isClosed) {
+                        if (inputFrame !== undefined && outputStream && !outputStream.isClosed) {
                             const waveFrame = waveStreamEncoder.encode(inputFrame);
                             if (!!waveFrame) {
                                 outputStream.writeStreamChunk({
@@ -107,7 +107,7 @@ export class PcmRecorder implements IRecorder {
             }
             if (this.privMediaResources.source) {
                 this.privMediaResources.source.disconnect();
-                // this.privMediaResources.stream.getTracks().forEach((track: any) => track.stop());
+                // this.privMediaResources.stream.getTracks().forEach((track: any) => track.stop()); // avoid stop of remote tracks
                 this.privMediaResources.source = null;
             }
         }
